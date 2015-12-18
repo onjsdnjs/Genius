@@ -29,7 +29,7 @@ public class StringReplaceExecutor {
 
             info.setPropertyFilePath(args[0]);
 
-            Log.console(" ** StringPattern Start. **  Elasped Time : ");
+            Log.console(" ** StringReplace Start. **  Elasped Time : ");
 
             StringReplace sp = new StringReplace(info);
             try {
@@ -37,19 +37,19 @@ public class StringReplaceExecutor {
             }catch (Exception e){
                 throw new Exception(ErrCode.G01_0001, e);
             }
-            Log.console(" StringPattern initialize done.");
+            Log.console(" StringReplace initialize done.");
 
             try {
                 sp.execute();
             }catch (Exception e){
                 throw new Exception(ErrCode.G01_0002, e);
             }
-            Log.console(" StringPattern execute done.");
+            Log.console(" StringReplace execute done.");
 
         } catch (Exception e) {
             Log.console(e.getMessage(), e);
         } finally {
-            Log.console(" ** StringPattern End. **  Elasped Time : " + (System.currentTimeMillis() - startTime) + " ms");
+            Log.console(" ** StringReplace End. **  Elasped Time : " + (System.currentTimeMillis() - startTime) + " ms");
         }
 
     }

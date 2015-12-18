@@ -1,0 +1,1 @@
+java -jar genius-stringreplace.jar ../property/011_stringreplace.properties

@@ -2,6 +2,8 @@ package name.yalsooni.genius.replace.replace;
 
 
 import name.yalsooni.common.util.support.Log;
+import name.yalsooni.genius.definition.ErrCode;
+import name.yalsooni.genius.replace.errcode.StringReplaceErrCode;
 import name.yalsooni.genius.replace.vo.StringReplaceInfo;
 
 /**
@@ -31,10 +33,18 @@ public class StringReplaceExecutor {
             Log.console(" ** StringPattern Start. **  Elasped Time : ");
 
             StringReplace sp = new StringReplace(info);
-            sp.initialize();
+            try {
+                sp.initialize();
+            }catch (Exception e){
+                throw new Exception(ErrCode.G01_0001, e);
+            }
             Log.console(" StringPattern initialize done.");
 
-            sp.execute();
+            try {
+                sp.execute();
+            }catch (Exception e){
+                throw new Exception(ErrCode.G01_0002, e);
+            }
             Log.console(" StringPattern execute done.");
 
         } catch (Exception e) {

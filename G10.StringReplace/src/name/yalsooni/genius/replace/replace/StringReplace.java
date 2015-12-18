@@ -27,13 +27,10 @@ public class StringReplace implements UtilService {
     private final int START_IDX = 3;
     private final int TARGET_IDX = START_IDX - 1;
 
-    private Properties makerProperty = null;
     private Properties filterList = null;
-    private PropertyReader pr = null;
 
     private FileData fSupport = null;
     private ExcelReader eReader = null;
-    private InstanceMap classUtil = null;
 
     private StringReplaceInfo defaultInfo = null;
 
@@ -55,8 +52,14 @@ public class StringReplace implements UtilService {
      */
     @Override
     public void initialize() throws Exception {
-        pr = new PropertyReader();
-        makerProperty = pr.read(PROPERTY_MAKER, defaultInfo.getPropertyFilePath());
+        PropertyReader pr = new PropertyReader();
+        Properties makerProperty;
+
+        try {
+            makerProperty = pr.read(PROPERTY_MAKER, defaultInfo.getPropertyFilePath());
+        }catch (Exception e){
+            throw new Exception(StringReplaceErrCode.G10_0006,e);
+        }
 
         defaultInfo.setExcelDataFilePath(makerProperty.getProperty("STRINGREPLACE.DATAEXCELFILEPATH"));
         defaultInfo.setFilterListFilePath(makerProperty.getProperty("STRINGREPLACE.FILTERLIST"));
@@ -68,7 +71,7 @@ public class StringReplace implements UtilService {
 
         fSupport = new FileData();
         eReader = new ExcelReader(excelFilePath, "");
-        classUtil = new InstanceMap();
+        InstanceMap classUtil = new InstanceMap();
         tempIDList = eReader.getData(LIST_SHEETNAME, 1, 1);
 
         // STRINGPATTERN.FILTERLIST
@@ -89,13 +92,13 @@ public class StringReplace implements UtilService {
 
         String tempID = null;
         String tempDir = null;
-        String target = null;
+        String reqTarget = null;
 
         for (List<String> row : tempIDList) {
 
-            target = row.get(2);
+            reqTarget = row.get(2);
 
-            if (target.equals(TARGET)) {
+            if (reqTarget.equals(TARGET)) {
                 tempID = row.get(0);
                 tempDir = row.get(1);
 
@@ -251,7 +254,7 @@ public class StringReplace implements UtilService {
 
         String key = null;
         String value = null;
-        Object obj = null;
+        Object obj;
 
         for (int j = START_IDX; j < values.size(); j++) {
 
@@ -266,7 +269,6 @@ public class StringReplace implements UtilService {
                 } catch (Exception e) {
                     throw new Exception(StringReplaceErrCode.G10_0005 + " : " + e.getMessage(), e);
                 }
-                obj = null;
             }
 
             try {

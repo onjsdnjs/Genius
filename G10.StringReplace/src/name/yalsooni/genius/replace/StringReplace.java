@@ -1,4 +1,4 @@
-package name.yalsooni.genius.replace.replace;
+package name.yalsooni.genius.replace;
 
 import name.yalsooni.common.util.excel.ExcelReader;
 import name.yalsooni.common.util.file.FileData;

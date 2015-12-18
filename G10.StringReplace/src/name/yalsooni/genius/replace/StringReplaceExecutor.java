@@ -1,9 +1,8 @@
-package name.yalsooni.genius.replace.replace;
+package name.yalsooni.genius.replace;
 
 
 import name.yalsooni.common.util.support.Log;
 import name.yalsooni.genius.definition.ErrCode;
-import name.yalsooni.genius.replace.errcode.StringReplaceErrCode;
 import name.yalsooni.genius.replace.vo.StringReplaceInfo;
 
 /**
